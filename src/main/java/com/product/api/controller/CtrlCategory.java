@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.product.api.entity.Category;
-import com.product.api.repository.RepoCategory;
+import com.product.api.service.SvcCategory;
 
 @RestController
 @RequestMapping("/api")
 public class CtrlCategory {
 
-    @Autowired
-    private RepoCategory repo;
+	@Autowired
+    private SvcCategory svcCategory;
 
     @GetMapping("/category")
     public List<Category> getCategories(){
-        return repo.getCategories();
+        return svcCategory.getCategories();
     }
 }
