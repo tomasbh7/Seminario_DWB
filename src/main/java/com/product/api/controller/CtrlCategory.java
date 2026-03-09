@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.product.api.entity.Category;
 import com.product.api.service.SvcCategory;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api")
@@ -16,7 +17,7 @@ public class CtrlCategory {
     private SvcCategory svcCategory;
 
     @GetMapping("/category")
-    public List<Category> getCategories(){
+    public ResponseEntity<List<Category>> getCategories(){
         return svcCategory.getCategories();
     }
 }
