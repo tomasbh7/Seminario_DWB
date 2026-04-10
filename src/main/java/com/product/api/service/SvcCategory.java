@@ -6,7 +6,6 @@ import com.product.api.dto.DtoCategoryIn;
 
 public interface SvcCategory {
 
-    // Reemplaza getCategories()
     public List<Category> findAll();
 
     public List<Category> findActive();

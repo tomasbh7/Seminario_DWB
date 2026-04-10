@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.product.api.entity.Category;
 import com.product.api.repository.RepoCategory;
-import com.product.dto.DtoCategoryIn;
+import com.product.api.dto.DtoCategoryIn;
 import com.product.exception.ApiException;
 
 @Service
@@ -30,6 +30,9 @@ public class SvcCategoryImplementacion implements SvcCategory {
         }
     }
 
+    // =========================
+    // GET ACTIVE
+    // =========================
     @Override
     public List<Category> findActive() {
         try {
@@ -40,7 +43,6 @@ public class SvcCategoryImplementacion implements SvcCategory {
         }
     }
 
- 
     @Override
     public void create(DtoCategoryIn in) {
         try {
@@ -67,7 +69,6 @@ public class SvcCategoryImplementacion implements SvcCategory {
         }
     }
 
-   
     @Override
     public void update(DtoCategoryIn in, Integer id) {
         try {

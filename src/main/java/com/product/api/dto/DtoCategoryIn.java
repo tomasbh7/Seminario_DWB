@@ -1,11 +1,28 @@
 package com.product.api.dto;
-import jakarta.validation.constraints.NotBlank;
+
+import jakarta.validation.constraints.NotNull;
 
 public class DtoCategoryIn {
 
-	@NotBlank(message = "El campo category no puede ser nulo")
+    @NotNull(message = "La categoría no puede ser nula")
     private String category;
 
-	@NotBlank(message = "El campo tag no puede ser nulo")
+    @NotNull(message = "El tag no puede ser nulo")
     private String tag;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 }
