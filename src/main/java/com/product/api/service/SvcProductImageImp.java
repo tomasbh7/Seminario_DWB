@@ -24,9 +24,9 @@ public class SvcProductImageImp implements SvcProductImage {
     private RepoProductImage repoImage;
 
     @Override
-    public ResponseEntity<String> registerImage(DtoProductImageIn in) {
+    public ResponseEntity<String> registerImage(Integer productId, DtoProductImageIn in) {
         try {
-            Product product = repoProduct.findById(in.getProductId())
+            Product product = repoProduct.findById(productId)
                     .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,
                             "El producto no existe"));
 
@@ -37,12 +37,45 @@ public class SvcProductImageImp implements SvcProductImage {
 
             repoImage.save(image);
 
-            return new ResponseEntity<>("Imagen registrada correctamente", HttpStatus.CREATED);
+            return new ResponseEntity<>("La imagen ha sido registrada", HttpStatus.CREATED);
 
         } catch (DataAccessException e) {
-        	e.printStackTrace();
             throw new DBAccessException(HttpStatus.INTERNAL_SERVER_ERROR,
                     "Error al registrar la imagen");
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getImagesByProduct(Integer productId) {
+        try {
+            return ResponseEntity.ok(
+                    repoImage.findByProductId(productId)
+            );
+        } catch (DataAccessException e) {
+            throw new DBAccessException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Error al obtener imágenes");
+        }
+    }
+
+    @Override
+    public ResponseEntity<String> deleteImage(Integer productId, Integer imageId) {
+        try {
+            ProductImage image = repoImage.findById(imageId)
+                    .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,
+                            "La imagen no existe"));
+
+            if (!image.getProduct().getProduct_id().equals(productId)) {
+                throw new ApiException(HttpStatus.BAD_REQUEST,
+                        "La imagen no pertenece al producto");
+            }
+
+            repoImage.delete(image);
+
+            return ResponseEntity.ok("La imagen ha sido eliminada");
+
+        } catch (DataAccessException e) {
+            throw new DBAccessException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Error al eliminar la imagen");
         }
     }
 }

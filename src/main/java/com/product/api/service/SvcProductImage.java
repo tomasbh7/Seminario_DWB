@@ -5,5 +5,9 @@ import com.product.api.dto.in.DtoProductImageIn;
 
 public interface SvcProductImage {
 
-    ResponseEntity<String> registerImage(DtoProductImageIn in);
+    ResponseEntity<String> registerImage(Integer productId, DtoProductImageIn in);
+
+    ResponseEntity<?> getImagesByProduct(Integer productId);
+
+    ResponseEntity<String> deleteImage(Integer productId, Integer imageId);
 }
