@@ -1,11 +1,15 @@
 package com.product.api.entity;
 
 import jakarta.persistence.Entity;
+
+
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "category")
@@ -13,33 +17,37 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer category_id;
+    @Column(name = "category_id")
+    @JsonProperty("id")
+    private Integer categoryId;
 
-    @Column(name = "category")
+    @Column(name = "category", nullable = false, unique = true, length = 50)
+    @JsonProperty("category")
     private String category;
 
-    @Column(name = "tag")
+    @Column(name = "tag", nullable = false, unique = true, length = 50)
+    @JsonProperty("tag")
     private String tag;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
+    @JsonProperty("status")
     private Integer status;
 
-    public Category() {
-    }
+    public Category() {}
 
-    public Category(Integer category_id, String category, String tag, Integer status) {
-        this.category_id = category_id;
+    public Category(Integer categoryId, String category, String tag, Integer status) {
+        this.categoryId = categoryId;
         this.category = category;
         this.tag = tag;
         this.status = status;
     }
 
-    public Integer getCategory_id() {
-        return category_id;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategory() {
