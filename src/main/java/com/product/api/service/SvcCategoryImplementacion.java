@@ -78,12 +78,12 @@ public class SvcCategoryImplementacion implements SvcCategory {
             }
             Category category = optional.get();
 
-            if (repoCategory.existsByCategoryAndIdNot(in.getCategory(), id)) {
+            if (repoCategory.existsByCategoryAndCategoryIdNot(in.getCategory(), id)) {
                 throw new ApiException(HttpStatus.BAD_REQUEST,
                         "La categoría ya existe");
             }
 
-            if (repoCategory.existsByTagAndIdNot(in.getTag(), id)) {
+            if (repoCategory.existsByCategoryAndCategoryIdNot(in.getTag(), id)) {
                 throw new ApiException(HttpStatus.BAD_REQUEST,
                         "El tag ya existe");
             }

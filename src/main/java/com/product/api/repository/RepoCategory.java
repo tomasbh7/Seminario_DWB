@@ -16,6 +16,6 @@ public interface RepoCategory extends JpaRepository<Category, Integer> {
     boolean existsByCategory(String category);
     boolean existsByTag(String tag);
 
-    boolean existsByCategoryAndIdNot(String category, Integer id);
-    boolean existsByTagAndIdNot(String tag, Integer id);
+    boolean existsByCategoryAndCategoryIdNot(String category, Integer categoryId);
+    boolean existsByTagAndCategoryIdNot(String tag, Integer categoryId);
 }

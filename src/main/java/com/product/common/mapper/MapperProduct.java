@@ -16,7 +16,7 @@ public class MapperProduct {
 		List<DtoProductListOut> list = new ArrayList<>();
 		for(Product product: products) {
 			list.add(new DtoProductListOut(
-					product.getProduct_id(),
+					product.getId(),
 					product.getGtin(),
 					product.getProduct(),
 					product.getPrice(),
@@ -41,7 +41,7 @@ public class MapperProduct {
 	
 	public Product fromDto(Integer id, DtoProductIn dto) {
 		Product product = fromDto(dto);
-		product.setProduct_id(id);
+		product.setId(id);
 		return product;
 	}
 	

@@ -1,6 +1,7 @@
 package com.product.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,7 @@ public class SvcProductImageImp implements SvcProductImage {
     public ResponseEntity<?> getImagesByProduct(Integer productId) {
         try {
             return ResponseEntity.ok(
-                    repoImage.findByProductId(productId)
+                    repoImage.findByProductProduct_Id(productId)
             );
         } catch (DataAccessException e) {
             throw new DBAccessException(HttpStatus.INTERNAL_SERVER_ERROR,
@@ -63,7 +64,7 @@ public class SvcProductImageImp implements SvcProductImage {
                     .orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND,
                             "La imagen no existe"));
 
-            if (!image.getProduct().getProduct_id().equals(productId)) {
+            if (!image.getProduct().getId().equals(productId)) {
                 throw new ApiException(HttpStatus.BAD_REQUEST,
                         "La imagen no pertenece al producto");
             }

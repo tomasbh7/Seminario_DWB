@@ -2,6 +2,7 @@ package com.product.api.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "image")
 public class ProductImage {
