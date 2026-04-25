@@ -1,7 +1,6 @@
 package com.product.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,9 +8,11 @@ import com.product.api.dto.in.DtoProductImageIn;
 import com.product.api.service.SvcProductImage;
 
 import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/product")
+@Tag(name = "Product Image", description = "Operaciones relacionadas con imágenes de productos")
 public class CtrlProductImage {
 
     @Autowired

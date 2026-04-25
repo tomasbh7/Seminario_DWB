@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.product.api.dto.DtoCategoryIn;
-
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Category", description = "Operaciones relacionadas con categorías")
 public class CtrlCategory {
 
-	@Autowired
+    @Autowired
     private SvcCategory svcCategory;
 
     @GetMapping("/category")
@@ -23,12 +24,10 @@ public class CtrlCategory {
         return svcCategory.findAll();
     }
 
-
     @GetMapping("/category/active")
     public List<Category> findActive() {
         return svcCategory.findActive();
     }
-
 
     @PostMapping("/category")
     public String create(@RequestBody DtoCategoryIn in) {
@@ -43,7 +42,6 @@ public class CtrlCategory {
         return "La categoría ha sido actualizada";
     }
 
- 
     @PatchMapping("/category/{id}/enable")
     public String enable(@PathVariable Integer id) {
         svcCategory.enable(id);
