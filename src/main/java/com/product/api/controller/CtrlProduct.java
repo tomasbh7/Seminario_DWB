@@ -2,6 +2,7 @@ package com.product.api.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.product.api.dto.in.DtoProductIn;
 import com.product.api.dto.out.DtoProductListOut;
 import com.product.api.dto.out.DtoProductOut;
+import com.product.api.entity.Product;
 import com.product.api.service.SvcProduct;
 
 import jakarta.validation.Valid;
@@ -37,6 +39,11 @@ public class CtrlProduct {
 	@GetMapping("/{id}")
 	public ResponseEntity<DtoProductOut> getProduct(@PathVariable Integer id) {
 		return svc.getProduct(id);
+	}
+	
+	@GetMapping("/gtin/{gtin}")
+	public ResponseEntity<Product> getProductByGtin(@PathVariable String gtin) {
+	    return svc.getProductByGtin(gtin);
 	}
 
 	@PostMapping

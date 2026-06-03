@@ -1,6 +1,7 @@
 package com.product.api.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -119,5 +120,22 @@ public class SvcProductImp implements SvcProduct{
 			throw new DBAccessException(e);
 		}
 	}
+	
+	@Override
+	public ResponseEntity getProductByGtin(String gtin) {
+	    try {
+	        Optional<Product> product = repo.findByGtin(gtin);
+	        if (product.isEmpty()) {
+	            throw new ApiException(HttpStatus.NOT_FOUND, "El producto no existe");
+	        }
+	        if (product.get().getStatus() == 0) {
+	            throw new ApiException(HttpStatus.BAD_REQUEST, "El producto no está disponible");
+	        }
+	        return ResponseEntity.ok(product.get());
+	    } catch (DataAccessException e) {
+	        throw new DBAccessException(e);
+	    }
+	}
+	
 
 }
