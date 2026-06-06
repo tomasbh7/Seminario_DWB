@@ -18,5 +18,7 @@ public interface SvcProduct {
 	public ResponseEntity<String> enableProduct(Integer id);
 	public ResponseEntity<String> disableProduct(Integer id);
 	ResponseEntity<Product> getProductByGtin(String gtin);
+	ResponseEntity<String> updateStock(String gtin, Integer quantity);
+	
 
 }

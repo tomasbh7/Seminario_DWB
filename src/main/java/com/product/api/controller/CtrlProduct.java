@@ -21,7 +21,7 @@ import com.product.api.dto.out.DtoProductListOut;
 import com.product.api.dto.out.DtoProductOut;
 import com.product.api.entity.Product;
 import com.product.api.service.SvcProduct;
-
+import com.product.api.dto.in.DtoStockUpdate;
 import jakarta.validation.Valid;
 
 @RestController
@@ -45,7 +45,15 @@ public class CtrlProduct {
 	public ResponseEntity<Product> getProductByGtin(@PathVariable String gtin) {
 	    return svc.getProductByGtin(gtin);
 	}
+	@PatchMapping("/stock/{gtin}")
+	public ResponseEntity<String> updateStock(
+	        @PathVariable String gtin,
+	        @RequestBody java.util.Map<String, Integer> body) {
 
+	    return svc.updateStock(
+	            gtin,
+	            body.get("quantity"));
+	}
 	@PostMapping
 	public ResponseEntity<String> createProduct(@Valid @RequestBody DtoProductIn in) {
 		return svc.createProduct(in);
